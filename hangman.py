@@ -1,5 +1,71 @@
 import sys
 
+STAGES = [
+    """
+      -----
+      |   |
+          |
+          |
+          |
+          |
+    =========
+    """,
+    """
+      -----
+      |   |
+      O   |
+          |
+          |
+          |
+    =========
+    """,
+    """
+      -----
+      |   |
+      O   |
+      |   |
+          |
+          |
+    =========
+    """,
+    """
+      -----
+      |   |
+      O   |
+     /|   |
+          |
+          |
+    =========
+    """,
+    """
+      -----
+      |   |
+      O   |
+     /|\  |
+          |
+          |
+    =========
+    """,
+    """
+      -----
+      |   |
+      O   |
+     /|\  |
+     /    |
+          |
+    =========
+    """,
+    """
+      -----
+      |   |
+      O   |
+     /|\  |
+     / \  |
+          |
+    =========
+    """,
+]
+
 if len(sys.argv) > 1:
     secret_word = sys.argv[1]
 else:
@@ -8,6 +74,7 @@ else:
 hidden_word = ["_" for _ in secret_word]
 lives = 6
 
+print(STAGES[6 - lives])
 print(" ".join(hidden_word))
 print("Lives:", lives)
 
@@ -24,6 +91,7 @@ while "_" in hidden_word and lives > 0:
         lives = lives - 1
         print("Wrong guess!")
 
+    print(STAGES[6 - lives])
     print(" ".join(hidden_word))
     print("Lives:", lives)
 
