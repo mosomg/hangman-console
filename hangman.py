@@ -1,7 +1,7 @@
 import sys
 
 STAGES = [
-    """
+    r"""
       -----
       |   |
           |
@@ -10,25 +10,25 @@ STAGES = [
           |
     =========
     """,
-    """
-      -----
-      |   |
-      O   |
-          |
-          |
-          |
-    =========
-    """,
-    """
+    r"""
       -----
       |   |
       O   |
+          |
+          |
+          |
+    =========
+    """,
+    r"""
+      -----
+      |   |
+      O   |
       |   |
           |
           |
     =========
     """,
-    """
+    r"""
       -----
       |   |
       O   |
@@ -37,7 +37,7 @@ STAGES = [
           |
     =========
     """,
-    """
+    r"""
       -----
       |   |
       O   |
@@ -46,7 +46,7 @@ STAGES = [
           |
     =========
     """,
-    """
+    r"""
       -----
       |   |
       O   |
@@ -55,7 +55,7 @@ STAGES = [
           |
     =========
     """,
-    """
+    r"""
       -----
       |   |
       O   |
@@ -72,18 +72,30 @@ else:
     secret_word = input("Enter the word to guess: ")
 
 hidden_word = ["_" for _ in secret_word]
+guessed_letters = []
 lives = 6
 
 print(STAGES[6 - lives])
 print(" ".join(hidden_word))
+print("Guessed letters:", ", ".join(guessed_letters))
 print("Lives:", lives)
 
 while "_" in hidden_word and lives > 0:
-    guess = input("Guess a letter: ")
+    guess = input("Guess a letter: ").strip().lower()
+
+    if len(guess) != 1 or not guess.isalpha():
+        print("Please enter a single letter.")
+        continue
+
+    if guess in guessed_letters:
+        print("You already guessed that letter.")
+        continue
+
+    guessed_letters.append(guess)
     found = False
 
     for index in range(len(secret_word)):
-        if secret_word[index].lower() == guess.lower():
+        if secret_word[index].lower() == guess:
             hidden_word[index] = secret_word[index]
             found = True
 
@@ -93,6 +105,7 @@ while "_" in hidden_word and lives > 0:
 
     print(STAGES[6 - lives])
     print(" ".join(hidden_word))
+    print("Guessed letters:", ", ".join(guessed_letters))
     print("Lives:", lives)
 
 if "_" not in hidden_word:
