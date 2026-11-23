@@ -7,3 +7,11 @@ else:
 
 hidden_word = ["_" for _ in secret_word]
 print(" ".join(hidden_word))
+
+guess = input("Guess a letter: ").lower()
+
+for index in range(len(secret_word)):
+    if secret_word[index] == guess:
+        hidden_word[index] = guess
+
+print(" ".join(hidden_word))
