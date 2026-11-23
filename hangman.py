@@ -66,24 +66,23 @@ STAGES = [
     """,
 ]
 
-
-def print_game_state(stage_index, hidden_word, guessed_letters, lives):
-    print(STAGES[stage_index])
-    print(" ".join(hidden_word))
-    print("Guessed letters:", ", ".join(guessed_letters))
-    print("Lives:", lives)
-
-
 if len(sys.argv) > 1:
-    secret_word = sys.argv[1]
+    secret_word = sys.argv[1].strip()
 else:
-    secret_word = input("Enter the word to guess: ")
+    secret_word = input("Enter the word to guess: ").strip()
+
+if not secret_word or not secret_word.isalpha():
+    print("Error: Secret word must contain only letters.")
+    sys.exit(1)
 
 hidden_word = ["_" for _ in secret_word]
 guessed_letters = []
 lives = 6
 
-print_game_state(6 - lives, hidden_word, guessed_letters, lives)
+print(STAGES[6 - lives])
+print(" ".join(hidden_word))
+print("Guessed letters:", ", ".join(guessed_letters))
+print("Lives:", lives)
 
 while "_" in hidden_word and lives > 0:
     guess = input("Guess a letter: ").strip().lower()
@@ -108,9 +107,12 @@ while "_" in hidden_word and lives > 0:
         lives = lives - 1
         print("Wrong guess!")
 
-    print_game_state(6 - lives, hidden_word, guessed_letters, lives)
+    print(STAGES[6 - lives])
+    print(" ".join(hidden_word))
+    print("Guessed letters:", ", ".join(guessed_letters))
+    print("Lives:", lives)
 
 if "_" not in hidden_word:
     print("You guessed the word!")
 else:
-    print("Out of lives! The word was:", secret_word)
+    print("Out of lives! The word was:", secret_word) 
