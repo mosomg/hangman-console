@@ -8,10 +8,13 @@ else:
 hidden_word = ["_" for _ in secret_word]
 print(" ".join(hidden_word))
 
-guess = input("Guess a letter: ")
+while "_" in hidden_word:
+    guess = input("Guess a letter: ")
 
-for index in range(len(secret_word)):
-    if secret_word[index].lower() == guess.lower():
-        hidden_word[index] = secret_word[index]
+    for index in range(len(secret_word)):
+        if secret_word[index].lower() == guess.lower():
+            hidden_word[index] = secret_word[index]
 
-print(" ".join(hidden_word))
+    print(" ".join(hidden_word))
+
+print("You guessed the word!")
